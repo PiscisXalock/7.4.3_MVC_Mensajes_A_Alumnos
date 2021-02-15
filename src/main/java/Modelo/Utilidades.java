@@ -18,8 +18,9 @@ import java.util.ArrayList;
  * @author Piscis Xalock
  */
 public class Utilidades {
-    public static ArrayList<Alumno> getAlumnos(String fichero) throws FileNotFoundException{
-		ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
+
+    public static ArrayList<Alumno> getAlumnos(String fichero) throws FileNotFoundException {
+        ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
 
         try {
 
@@ -28,7 +29,7 @@ public class Utilidades {
             try {
 
                 while ((linea = buffer.readLine()) != null) {
-                    String [] atributosAlumno = linea.split(";");
+                    String[] atributosAlumno = linea.split(";");
                     Alumno alum = new Alumno(Integer.parseInt(atributosAlumno[0]),
                             atributosAlumno[1],
                             atributosAlumno[2],
@@ -44,7 +45,7 @@ public class Utilidades {
         } catch (UnsupportedEncodingException e) {
 
         }
-        return alumnos;	
-	}
+        return alumnos;
+    }
 
 }

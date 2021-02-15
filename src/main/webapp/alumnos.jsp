@@ -12,38 +12,83 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            #form1 {
+                padding:20px;
+                background-image: url("imagenes/form1.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
+                background-position: center;
+                border-bottom: 2px solid bisque;
+                text-align: center;
+            }
+            #form2, table {
+                padding:20px;
+                background-image: url("imagenes/form2.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
+                background-position: center;
+                text-align: center;
+                margin: auto;
+            }
+
+            td{
+                border: 1px solid tomato;
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body>
-        <h1>Mensajes Alumnos</h1>
+        <h1>Mensaje a alumnos</h1>
         <%
-            String grupo_activo = (String) request.getAttribute("grupo");
-            ArrayList<Alumno> grupos = (ArrayList<Alumno>) request.getAttribute("grupos");
+            String grupoActivo = (String) request.getAttribute("grupo");
+            ArrayList<String> grupos = (ArrayList<String>) request.getAttribute("grupos");
             ArrayList<Alumno> alumnos = (ArrayList<Alumno>) request.getAttribute("alumnos");
         %>
-        <hr>
-        <h1>Grupo seleccionado <%= grupo_activo%></h1>
-        <form action="action" method="post">
+        Grupo Seleccionado: <%=grupoActivo%> <br>
+        <form id="form1" action="servletAlumno" method="get">
             Grupo: <select name="grupo">
+
                 <%
-                    for(int i = 0; i < grupos.size(); i++) {
+
+                    for (String p : grupos) {
                         String textoSelected = "";
-                        if(grupos.get(i).equals(grupo_activo)) {
+                        if (p.equals(grupoActivo)) {
                             textoSelected = " selected";
                         }
                 %>
-                <option <%= textoSelected%> value="<%= grupos.get(i)%>"><%= grupos.get(i)%></option>
-                <% } %>
-            </select>
-            <br>
-            Alumnos: <select name="alumno">
-                <%
-                    for(int i = 0; i < alumnos.size(); i++) {
-                %>
-                <option value="<%= alumnos.get(i)%>"><%= alumnos.get(i)%></option>
+                <option <%=textoSelected%> value="<%=p%>"><%=p%></option>
                 <% }%>
             </select>
-            <input type="submit" value="Mostrar">
+            <br>
+            <input type="submit" value="Seleccionar">
         </form>
-        <br>
+
+        <form id="form2" action="servletAlumno" method="post">
+            Grupo seleccionado: <input type="text" name="grupoSeleccionado" value="<%=grupoActivo%>">
+
+            <table>
+                <% for (Alumno al : alumnos) {%>
+                <tr>
+                    <td>
+                        <%=al.getNombre()%>
+                    </td>
+                    <td>
+                        <%=al.getApellidos()%>
+                    </td>
+                    <td>
+                        <%=al.getEmail()%>
+                    </td>
+                    <td>
+                        <input type="checkbox"  value="1" name="<%=al.getId()%>">
+                    </td>
+                </tr>
+                <% }%>
+            </table>
+            <input type="submit" value="Enviar">
+        </form>
+
     </body>
 </html>

@@ -22,9 +22,6 @@ public class Alumno {
     private String nombre;
     private String apellidos;
     private String email;
-    
-    public Alumno() {
-    }
 
     public Alumno(int id, String nombre, String apellidos, String email) {
         this.id = id;
@@ -37,28 +34,28 @@ public class Alumno {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getApellidos() {
         return apellidos;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
     public String getEmail() {
         return email;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public void setEmail(String email) {

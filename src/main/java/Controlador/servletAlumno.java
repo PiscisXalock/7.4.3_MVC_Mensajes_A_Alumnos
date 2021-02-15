@@ -32,8 +32,8 @@ public class servletAlumno extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private ArrayList<String> grupos;
     private String rutaFicheros;
+    private ArrayList<String> grupos;
 
     public void init(ServletConfig config)
             throws ServletException {
@@ -41,6 +41,7 @@ public class servletAlumno extends HttpServlet {
         grupos.add("2DAW_A");
         grupos.add("2DAW_B");
         rutaFicheros = config.getServletContext().getRealPath("").concat(File.separator).concat("ficheros");
+
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -110,25 +111,7 @@ public class servletAlumno extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String grupoInicial = "2DAW_A";
-        if (request.getParameter("grupo") != null) {
-            grupoInicial = request.getParameter("grupo");
-        }
-        String archivoAsociado = "";
-        switch (grupoInicial) {
-            case "2DAW_A":
-                archivoAsociado = "2daw_a.txt";
-                break;
-            case "2DAW_B":
-                archivoAsociado = "2daw_b.txt";
-                break;
-        }
-        String fichero = this.rutaFicheros.concat(File.separator).concat(archivoAsociado);
-        ArrayList<Alumno> alumnos = Utilidades.getAlumnos(fichero);
-        request.setAttribute("grupo", grupoInicial);
-        request.setAttribute("grupos", grupos);
-        request.setAttribute("alumnos", alumnos);
-        request.getRequestDispatcher("alumnos.jsp").forward(request, response);
+        
     }
 
     /**
